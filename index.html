@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/Icon.svg">
+    <title>MeetUp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="part1">
+        <div class="sidebar">
+            <div class="sidebar-logo">
+                <img src="img/Icon.svg" alt="">
+                <span>MeetUp</span>
+            </div>
+            <div class="sidebar-options">
+                <a href=""><img src="img/Home.svg" alt=""><span>Home</span></a>
+                <a href=""><img src="img/fi_6825718.svg" alt=""><span>Upcoming</span></a>
+                <a href=""><img src="img/Video.svg" alt=""><span>Recordings</span></a>
+                <a href=""><img src="img/ic_round-plus.svg" alt=""><span>Personal Room</span></a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="part2">
+        <div class="nav">
+            <div class="logo">
+                <div class="hamburger-menu" onclick="toggleSidebar()">
+                    ☰
+                    <img src="img/Icon.svg" alt="" style="height: 45px; ">
+                    <span>MeetUp</span>
+                </div>
+                
+            </div>
+            <div class="loginside">
+                <button class="loginbtn"><i class="fa-regular fa-user"></i> Log-in</button>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="banner">
+                <div class="time" id="currentTime"></div>
+                <div class="date" id="currentDate"></div>
+            </div>
+            <div class="meetings">
+                <div class="new-meeting">
+                    <div class="card-icon"><img src="img/ic_round-plus.svg"></div>
+                    <div class="card-detail">
+                        <p class="card-head">New Meeting</p>
+                        <p class="card-info">Start an instant meeting</p>
+                    </div>
+                </div>
+                <div class="join-meeting">
+                    <div class="card-icon"><img src="img/ant-design_user-add-outlined.svg" alt=""></div>
+                    <div class="card-detail">
+                        <p class="card-head">Join Meeting</p>
+                        <p class="card-info">via invitation link</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+    <script>
+            document.querySelector('.hamburger-menu').addEventListener('click', function() {
+            document.querySelector('.part1').classList.toggle('active');
+            });
+
+
+            function updateTimeAndDate() {
+                const now = new Date();
+
+                // Format time
+                let hours = now.getHours();
+                const minutes = now.getMinutes();
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                const formattedTime = `${hours}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
+
+                // Format date
+                const options = { day: '2-digit', month: 'long', year: 'numeric' };
+                const formattedDate = now.toLocaleDateString('en-US', options);
+
+                // Update the DOM
+                document.getElementById('currentTime').innerText = formattedTime;
+                document.getElementById('currentDate').innerText = formattedDate;
+            }
+
+            setInterval(updateTimeAndDate, 1000);
+            updateTimeAndDate();
+    </script>
+</body>
+</html>
